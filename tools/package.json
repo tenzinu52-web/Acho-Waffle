@@ -1,0 +1,21 @@
+{
+  "name": "acho-waffles-tools",
+  "private": true,
+  "description": "Build and test tools for the ACHO WAFFLES website",
+  "scripts": {
+    "pages": "python3 make_pages.py",
+    "css": "./build_css.sh",
+    "test": "node e2e.js"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource/instrument-sans": "^5.3.0",
+    "htm": "3.1.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "tailwindcss": "3.4.17"
+  }
+}

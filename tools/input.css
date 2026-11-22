@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+/* ---- ACHO custom styles ---- */
+
+  :root{
+    --bg:250 244 232; --sand:239 227 204; --surface:255 255 255;
+    --ink:52 31 20; --ink2:112 86 70; --choc:107 60 36; --gold:240 184 58;
+    color-scheme:light;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:33 22 16; --sand:46 31 23; --surface:58 39 29;
+      --ink:250 241 226; --ink2:210 189 165; --choc:236 176 98; --gold:240 184 58;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:33 22 16; --sand:46 31 23; --surface:58 39 29;
+    --ink:250 241 226; --ink2:210 189 165; --choc:236 176 98; --gold:240 184 58;
+    color-scheme:dark;
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 92px);-webkit-text-size-adjust:100%}
+  body{margin:0;background:rgb(var(--bg));color:rgb(var(--ink));-webkit-font-smoothing:antialiased;animation:pageIn .4s ease backwards}
+  @keyframes pageIn{from{opacity:0}to{opacity:1}}
+  [hidden]{display:none!important}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgb(var(--bg) / .92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);z-index:10}
+  .hdr{background:rgb(var(--bg) / .92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  :focus-visible{outline:3px solid rgb(var(--choc));outline-offset:3px}
+  .on-dark :focus-visible{outline-color:#F0B83A}
+  .skip{position:absolute;left:-999px;top:8px;z-index:100;padding:.6em 1em;border-radius:999px;background:#F0B83A;color:#2E1A10;font-weight:700}
+  .skip:focus{left:12px}
+  dialog{color:inherit}
+
+  /* ---------- reveal on scroll ---------- */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .rvi{clip-path:inset(0 0 100% 0);transition:clip-path 1.15s cubic-bezier(.2,.7,.2,1)}
+  .rvi.in{clip-path:inset(0 0 0 0)}
+  .rvi .zoom{transform:scale(1.16);transition:transform 1.7s cubic-bezier(.2,.7,.2,1)}
+  .rvi.in .zoom{transform:scale(1)}
+  @keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .card-in{opacity:0;animation:cardIn .6s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ---------- gentle floating photographic elements ---------- */
+  .fl{animation:fl var(--d,7s) ease-in-out var(--dl,0s) infinite;will-change:transform}
+  @keyframes fl{0%,100%{transform:translate3d(0,0,0) rotate(var(--r0,-5deg))}50%{transform:translate3d(var(--dx,6px),var(--dy,-14px),0) rotate(var(--r1,6deg))}}
+  .spin{animation:spin 28s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .arr{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  a:hover .arr,button:hover .arr{transform:translateX(5px)}
+  .arr-idle{animation:nudge 2.4s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+  .bob{animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+  .cart-bump{animation:bump .75s cubic-bezier(.3,1.6,.5,1)}
+  @keyframes bump{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.28) rotate(-10deg)}60%{transform:scale(.94) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+  .pop{animation:pop .5s cubic-bezier(.3,1.7,.5,1)}
+  @keyframes pop{0%{transform:scale(.4)}100%{transform:scale(1)}}
+
+  /* hero slideshow */
+  .slide{opacity:0;transition:opacity 1.3s ease}
+  .slide.on{opacity:1}
+  .slide img{transform:scale(1.02);transition:transform 7s ease-out}
+  .slide.on img{transform:scale(1.08)}
+
+  /* builder preview crossfade */
+  @keyframes fadeIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+  .xfade{animation:fadeIn .75s ease both}
+  @keyframes chipIn{from{opacity:0;transform:translateY(6px) scale(.9)}to{opacity:1;transform:none}}
+  .chip-in{animation:chipIn .4s cubic-bezier(.3,1.5,.5,1) both}
+
+  /* promise rows: line draws in, title rises out of a mask */
+  .draw{transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .in .draw,.draw.in{transform:scaleX(1)}
+  .mask{overflow:hidden}
+  .mask > span{display:block;transform:translateY(105%);transition:transform .95s cubic-bezier(.2,.7,.2,1)}
+  .in .mask > span{transform:none}
+
+  /* sweeping button fill */
+  .bx{position:relative;overflow:hidden;isolation:isolate}
+  .bx::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--sweep,rgb(var(--ink)));transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+  .bx:hover::before,.bx:focus-visible::before{transform:none}
+
+  /* photographic option tiles */
+  .tile{position:relative;display:block;cursor:pointer}
+  .tile input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:2}
+  .tile .box{position:relative;overflow:hidden;border-radius:1.25rem;background:rgb(var(--sand));outline:2px solid transparent;outline-offset:-2px;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,outline-color .25s}
+  .tile:hover .box{transform:translateY(-3px);box-shadow:0 18px 30px -20px rgba(58,34,24,.6)}
+  .tile input:checked + .box{outline:4px solid #F0B83A;outline-offset:-4px;box-shadow:0 18px 34px -20px rgba(58,34,24,.65)}
+  .tile input:focus-visible + .box{outline:4px solid rgb(var(--choc));outline-offset:3px}
+  .tile .ph{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .tile:hover .ph{transform:scale(1.07)}
+  .tile .tick{position:absolute;right:.6rem;top:.6rem;width:1.7rem;height:1.7rem;border-radius:999px;background:#F0B83A;color:#2E1A10;display:grid;place-items:center;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.7,.5,1);z-index:1}
+  .tile input:checked + .box .tick{transform:scale(1)}
+
+  /* ---------- photos: one hairline frame, one soft grade, a quiet loading shimmer ---------- */
+  .frame::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;box-shadow:inset 0 0 0 1px rgb(var(--ink) / .1);pointer-events:none}
+  .shimmer{background-image:linear-gradient(100deg,transparent 25%,rgb(255 255 255 / .25) 50%,transparent 75%);background-size:220% 100%;animation:shim 1.5s ease-in-out infinite}
+  @keyframes shim{from{background-position:120% 0}to{background-position:-120% 0}}
+  .photo{opacity:0;transition:opacity .7s ease}
+  .photo.is-loaded{opacity:1}
+  .rvi .photo{transition:transform 1.7s cubic-bezier(.2,.7,.2,1),opacity .7s ease}
+  .photo,.frame img,.slide img,.fl img,.lb-img{filter:saturate(1.05) contrast(1.02)}
+
+  /* ---------- scrolling band, hero tilt, picker ---------- */
+  .marq-track{animation:marq 44s linear infinite}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .marq:hover .marq-track,.marq:focus-within .marq-track,.marq.is-paused .marq-track{animation-play-state:paused}
+  .tilt{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
+  .dice-roll{animation:dice .7s linear infinite}
+  @keyframes dice{to{transform:rotate(360deg)}}
+  .land{animation:land .7s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes land{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:none}}
+
+  /* ---------- favourites ---------- */
+  .fav svg{transition:transform .3s cubic-bezier(.3,1.7,.5,1)}
+  .fav.is-on svg{color:#E04856;animation:beat .5s cubic-bezier(.3,1.7,.5,1)}
+  .fav.is-on svg path{fill:currentColor}
+  @keyframes beat{0%{transform:scale(.55)}100%{transform:scale(1)}}
+
+  /* ---------- dialogs: drawer, quick view, photo viewer ---------- */
+  dialog.drawer[open]{animation:drawerIn .42s cubic-bezier(.2,.8,.2,1)}
+  @keyframes drawerIn{from{transform:translateX(48px);opacity:0}to{transform:none;opacity:1}}
+  dialog.modal{overflow:hidden}
+  dialog.modal[open]{animation:modalIn .4s cubic-bezier(.2,.8,.2,1)}
+  @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+  dialog[open]::backdrop{animation:bdIn .3s ease}
+  dialog.lb[open]{animation:bdIn .3s ease}
+  @keyframes bdIn{from{opacity:0}to{opacity:1}}
+  .lb-img{animation:lbIn .45s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes lbIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+
+  /* ---------- FAQ accordion ---------- */
+  .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.7,.2,1)}
+  .acc-in{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s .4s}
+  .acc.is-open .acc-panel{grid-template-rows:1fr}
+  .acc.is-open .acc-in{visibility:visible;transition-delay:0s}
+  .acc-plus{transition:transform .4s cubic-bezier(.2,.7,.2,1),background-color .3s,border-color .3s,color .3s}
+  .acc.is-open .acc-plus{transform:rotate(45deg);background:rgb(var(--gold));border-color:rgb(var(--gold));color:#2E1A10}
+
+  /* ---------- form controls ---------- */
+  .field{display:block;width:100%;height:3rem;border-radius:1rem;border:2px solid rgb(var(--ink) / .22);background:rgb(var(--surface));color:rgb(var(--ink));padding:0 1rem;font:inherit;font-size:1rem;transition:border-color .25s,box-shadow .25s}
+  .field:hover{border-color:rgb(var(--ink) / .5)}
+  .field:focus{outline:none;border-color:rgb(var(--ink));box-shadow:0 0 0 4px rgb(var(--gold) / .5)}
+  .field::placeholder{color:rgb(var(--ink2) / .85)}
+  .field[aria-invalid="true"]{border-color:#B3261E}
+  textarea.field{resize:vertical;line-height:1.5}
+  select.field{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+  .err{color:#B3261E}
+  .err-box{border-color:#B3261E}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .err{color:#FFB4AB}
+    :root:not([data-theme="light"]) .err-box,:root:not([data-theme="light"]) .field[aria-invalid="true"]{border-color:#FFB4AB}
+  }
+  :root[data-theme="dark"] .err{color:#FFB4AB}
+  :root[data-theme="dark"] .err-box,:root[data-theme="dark"] .field[aria-invalid="true"]{border-color:#FFB4AB}
+
+  /* ---------- big radio cards ---------- */
+  .choice input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
+  .choice .box{display:flex;gap:1rem;height:100%;border:2px solid rgb(var(--ink) / .2);border-radius:1rem;background:rgb(var(--surface));padding:1rem;transition:border-color .25s,box-shadow .3s,transform .3s}
+  .choice:hover .box{border-color:rgb(var(--ink) / .6)}
+  .choice input:checked + .box{border-color:rgb(var(--ink));box-shadow:0 14px 30px -20px rgba(58,34,24,.6)}
+  .choice input:focus-visible + .box{outline:3px solid rgb(var(--choc));outline-offset:3px}
+  .choice .dot{transform:scale(0);transition:transform .3s cubic-bezier(.3,1.7,.5,1)}
+  .choice input:checked + .box .dot{transform:scale(1)}
+
+  /* ---------- draw-on check ---------- */
+  .chk-c{stroke-dasharray:176;stroke-dashoffset:176;animation:chk .8s cubic-bezier(.4,0,.2,1) .1s forwards}
+  .chk-t{opacity:0;stroke-dasharray:40;stroke-dashoffset:40;animation:chkT .5s cubic-bezier(.4,0,.2,1) .7s forwards}
+  @keyframes chk{to{stroke-dashoffset:0}}
+  @keyframes chkT{0%{opacity:1;stroke-dashoffset:40}100%{opacity:1;stroke-dashoffset:0}}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    body{animation:none}
+    .rv,.rvi,.rvi .zoom,.card-in,.draw,.mask > span{opacity:1;transform:none;clip-path:none;transition:none;animation:none}
+    .fl,.spin,.arr-idle,.bob,.cart-bump,.pop,.xfade,.chip-in{animation:none}
+    .slide img,.slide.on img{transform:none;transition:none}
+    .shimmer{animation:none;background-image:none}
+    .photo{opacity:1;transition:none}
+    .tilt{transform:none;transition:none}
+    .marq-track{animation:none;width:auto!important;flex-wrap:wrap!important;justify-content:center}
+    .marq-run{flex-wrap:wrap;justify-content:center}
+    .marq-dup,.marq-btn{display:none!important}
+    .dice-roll,.land,.lb-img,.fav.is-on svg,dialog[open],dialog[open]::backdrop,dialog.drawer[open],dialog.modal[open]{animation:none}
+    .acc-panel,.acc-plus{transition:none}
+    .chk-c,.chk-t{animation:none;stroke-dashoffset:0;opacity:1}
+    *,*::before,*::after{transition-duration:.01ms !important}
+  }
+
+/* ---- utilities last, as the Tailwind runtime did ---- */
+@tailwind utilities;
