@@ -326,6 +326,7 @@ async function pageChecks(browser, label, opts) {
     await page.locator('dialog a[href="checkout.html"]').click(); await page.waitForURL("**/checkout.html"); await page.waitForSelector("h1"); await page.waitForTimeout(500);
     const TOTAL = money(PR.acho + PR.dchoco);
     ok((await page.locator("[data-testid=co-total]").innerText()) === TOTAL, "checkout: summary total is " + TOTAL);
+    ok((await page.locator("label.choice:has-text('Pickup')").innerText()).includes("Ga Phel Shopping Center Building Secound Floor."), "checkout: pickup option shows the current address");
     ok((await page.locator('input[autocomplete^="cc-"], input[name*="card" i]').count()) === 0, "checkout: no card number fields anywhere");
     ok((await page.locator("text=We do not take card payments").count()) >= 1, "checkout: says plainly that cards are not taken");
     await page.locator('[data-testid=co-submit]').click(); await page.waitForTimeout(300);
