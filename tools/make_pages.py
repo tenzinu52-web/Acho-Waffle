@@ -4,7 +4,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap"
 PAGES = {
  "index": dict(page="home", title="ACHO WAFFLES",
-    desc="Crispy waffle sticks, chocolate toppings and boba drinks from ACHO WAFFLES at Ga Phel Shopping Center Building Second Floor.",
+    desc="Crispy waffle sticks, chocolate toppings and boba drinks from ACHO WAFFLES at Ga Phel Shopping Center Building Secound Floor.",
     sections=["Hero", "Marquee", "Picks", "Surprise", "BuildTeaser", {"name": "Story", "props": {"teaser": True}}, "Drinks", "GalleryStrip", "Visit"], builder=False),
  "story": dict(page="story", title="Our Story | ACHO WAFFLES",
     desc="More than just waffles. The story behind ACHO WAFFLES and what makes it special.",
@@ -19,7 +19,7 @@ PAGES = {
     desc="Photos of ACHO WAFFLES waffle sticks, chocolate creations and drinks.",
     sections=["Gallery", "Visit"], builder=False),
  "contact": dict(page="contact", title="Contact | ACHO WAFFLES",
-    desc="Find ACHO WAFFLES at Ga Phel Shopping Center Building Second Floor. Call 77771913 or 17590047.",
+    desc="Find ACHO WAFFLES at Ga Phel Shopping Center Building Secound Floor. Call 77771913 or 17590047.",
     sections=["Contact", "Faq"], builder=False),
  "checkout": dict(page="checkout", title="Checkout | ACHO WAFFLES",
     desc="Check out your ACHO WAFFLES order. Pick up or ask about delivery, then send your order on WhatsApp.",
