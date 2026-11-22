@@ -20,7 +20,7 @@
     instagramHandle: "@acho_waffles",
     tiktok: "https://www.tiktok.com/@acho.waffles",
     mapsLink: "https://www.google.com/maps/search/?api=1&query=ACHO+WAFFLES",
-    address: "Ga Phel Shopping Center Building Secound Floor.",
+    address: "Ga Phel Shopping Center Building Second Floor.",
     phones: ["77771913", "17590047"],
     whatsapp: "97577771913",   // country code 975 (Bhutan) + number. Change it if your WhatsApp is a different number.
     delivery: true,            // shows "Ask about delivery" at checkout. We never promise delivery: ACHO confirms it on WhatsApp.
