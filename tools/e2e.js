@@ -96,7 +96,8 @@ async function pageChecks(browser, label, opts) {
     const { ctx, page } = await newPage(browser, { viewport: { width: 1440, height: 900 } });
     await page.goto("http://127.0.0.1:8123/contact.html"); await page.waitForSelector("h1");
     const t = await page.evaluate(() => document.body.innerText);
-    ok(t.includes("Opposite 8eleven & OH WOW, below YOLO Cafe."), "contact: address text");
+    ok(t.includes("Ga Phel Shopping Center Building Second Floor."), "contact: updated address text");
+    ok((await page.locator('meta[name="description"]').getAttribute("content")).includes("Ga Phel Shopping Center Building Second Floor."), "contact: updated address metadata");
     ok(t.includes("77771913") && t.includes("17590047"), "contact: both phone numbers shown as text");
     ok((await page.locator('a[href="tel:77771913"]').count()) >= 1 && (await page.locator('a[href="tel:17590047"]').count()) >= 1, "contact: tel links present");
     ok((await page.locator('button:has-text("Copy")').count()) >= 2, "contact: copy buttons for the phone numbers");
